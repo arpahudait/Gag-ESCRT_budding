@@ -1,0 +1,49 @@
+variable TEMP           equal   310.0
+variable PRESS 		equal   0.0
+
+variable SEED  		equal  	12392
+variable SEED2   	equal   $( v_SEED + 1099 )
+variable SEED3  	equal   $( v_SEED + 80192 ) 
+variable SEED4  	equal   $( v_SEED + 7102 )
+variable SEED5 		equal   $( v_SEED + 30192 )
+
+variable GH  		equal   -7.0
+
+include 		"system.init"
+read_data 		Rgag_50nm.data
+
+include 		"gag.ff"
+
+group 			MA type <> 1 20
+group 			CA type <> 22 56
+group 			NC type <> 58 68
+group			Gag type <> 1 69
+
+neigh_modify 		exclude molecule/intra MA
+neigh_modify 		exclude molecule/intra CA
+neigh_modify 		exclude molecule/intra NC
+
+fix			xwalls all wall/reflect zlo EDGE zhi EDGE
+
+group			Gag_mobile subtract Gag CA 
+
+velocity 		all create ${TEMP} ${SEED} mom yes rot yes dist gaussian
+
+timestep  		50.0
+reset_timestep 		0
+
+compute 		1 all pair gauss/wall
+
+thermo 			1000
+thermo_style  		custom step spcpu temp ke pe etotal epair c_1 lx ly lz  pxx pyy pzz
+
+fix 			1  Gag_mobile  	nve
+fix 			2  Gag_mobile	langevin ${TEMP} ${TEMP} 10000.0 ${SEED2} zero yes
+
+fix 			b1 all balance 5000 0.95 shift xy 15 1.03 #weight time 0.8
+
+dump                    1 all custom 10000 GAG.lammpstrj id mol type xs ys zs
+dump_modify             1 sort id
+
+run 			100000
+write_data 		eq0.data nocoeff
