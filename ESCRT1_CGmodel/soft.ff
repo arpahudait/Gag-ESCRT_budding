@@ -1,0 +1,10 @@
+pair_coeff    *    *   soft  25.000  15.000
+
+pair_coeff   58   77   soft  25.000  13.293
+pair_coeff   59   77   soft  25.000  12.748
+pair_coeff   74   77   soft  25.000   9.184
+pair_coeff   79   82   soft  25.000  13.641
+pair_coeff   80   81   soft  25.000  12.752
+pair_coeff   82   85   soft  25.000  12.677
+pair_coeff   81   86   soft  25.000  11.182
+
