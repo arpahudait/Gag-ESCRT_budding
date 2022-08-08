@@ -1,0 +1,23 @@
+##### MEMBRANE (Grime 3-site model)
+bond_coeff    1        ${BOND_K}  ${BOND_R}
+bond_coeff    2        ${BOND_K}  ${BOND_R}
+
+angle_coeff   1        ${BEND_K}    180.0
+
+##### 1 is top, 3 is bottom bead in MEMBRANE
+pair_coeff   1  1         john4  ${A_HH}  	${R_HH}	0.0 	${R_HH}
+pair_coeff   1  2         john4  ${A}   	${R}   	0.0   	${R}
+pair_coeff   1  3         john4  ${A}    	${R}   	0.0   	${R}
+pair_coeff   2  2         john4  ${A}    	${R}   	${B}   	${RC}
+pair_coeff   2  3         john4  ${A}    	${R}   	0.0   	${R}
+pair_coeff   3  3         john4  ${A_HH}  	${R_HH}	0.0   	${R_HH}
+
+##### ESCRT2(PIP2 interaction)-Membrane model
+pair_coeff   3  8*9     lj/cut/soft    1.5   15.0    0.6
+pair_coeff   3  18*19   lj/cut/soft    1.5   15.0    0.6  
+
+pair_coeff   3  61*62   lj/cut/soft    1.5   15.0    0.6
+pair_coeff   3  64*66   lj/cut/soft    1.5   15.0    0.6
+pair_coeff   3  70      lj/cut/soft    1.5   15.0    0.6
+pair_coeff   3  86      lj/cut/soft    1.5   15.0    0.6
+pair_coeff   3  95      lj/cut/soft    1.5   15.0    0.6
