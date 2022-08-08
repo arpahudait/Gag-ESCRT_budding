@@ -12,6 +12,7 @@ variable GH  		equal   -7.0
 include 		"system.init"
 read_data 		Rgag_50nm.data
 
+include			"gag_bond.ff"
 include 		"gag.ff"
 
 group 			MA type <> 1 20
