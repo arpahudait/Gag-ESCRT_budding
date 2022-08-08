@@ -1,0 +1,2 @@
+These are the custom fixes required to run the simulations.
+These fix files need to added to the src directory of a publicly available LAMMPS release
